@@ -135,27 +135,27 @@
           {
             alert: 'NodeNetworkReceiveErrs',
             expr: |||
-              increase(node_network_receive_errs_total[2m]) > 10
+              increase(node_network_receive_errs_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[1m]) > 0
             ||| % $._config,
-            'for': '1h',
+            'for': '5m',
             labels: {
               severity: 'critical',
             },
             annotations: {
-              message: '{{ $labels.instance }} interface {{ $labels.device }} shows errors while receiving packets ({{ $value }} errors in two minutes).',
+              message: '{{ $labels.instance }} interface {{ $labels.device }} shows errors while receiving packets ({{ $value }} errors per minute).',
             },
           },
           {
             alert: 'NodeNetworkTransmitErrs',
             expr: |||
-              increase(node_network_transmit_errs_total[2m]) > 10
+              increase(node_network_transmit_errs_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[1m]) > 0
             ||| % $._config,
-            'for': '1h',
+            'for': '5m',
             labels: {
               severity: 'critical',
             },
             annotations: {
-              message: '{{ $labels.instance }} interface {{ $labels.device }} shows errors while transmitting packets ({{ $value }} errors in two minutes).',
+              message: '{{ $labels.instance }} interface {{ $labels.device }} shows errors while transmitting packets ({{ $value }} errors per minute).',
             },
           },
         ],
