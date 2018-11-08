@@ -135,7 +135,7 @@
           {
             alert: 'NodeNetworkReceiveErrs',
             expr: |||
-              increase(node_network_receive_errs_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[1m]) > 0
+              increase(node_network_receive_errs_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]) / 5 > 0
             ||| % $._config,
             'for': '5m',
             labels: {
@@ -148,7 +148,7 @@
           {
             alert: 'NodeNetworkTransmitErrs',
             expr: |||
-              increase(node_network_transmit_errs_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[1m]) > 0
+              increase(node_network_transmit_errs_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]) / 5 > 0
             ||| % $._config,
             'for': '5m',
             labels: {

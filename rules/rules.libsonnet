@@ -20,7 +20,7 @@
             record: 'instance:node_cpu_seconds_total_utilisation:avg1m',
             expr: |||
               1 - avg by (instance) (
-                rate(node_cpu_seconds_total{%(nodeExporterSelector)s,mode="idle"}[1m])
+                irate(node_cpu_seconds_total{%(nodeExporterSelector)s,mode="idle"}[1m])
               )
             ||| % $._config,
           },
@@ -58,8 +58,8 @@
             record: 'instance:node_memory_swap_io_bytes:sum_rate',
             expr: |||
               1e3 * sum by (instance) (
-                (rate(node_vmstat_pgpgin{%(nodeExporterSelector)s}[1m])
-                 + rate(node_vmstat_pgpgout{%(nodeExporterSelector)s}[1m]))
+                (rate(node_vmstat_pgpgin{%(nodeExporterSelector)s}[5m])
+                 + rate(node_vmstat_pgpgout{%(nodeExporterSelector)s}[5m]))
               )
             ||| % $._config,
           },
@@ -68,7 +68,7 @@
             record: 'instance:node_disk_utilisation:sum_irate',
             expr: |||
               sum by (instance) (
-                irate(node_disk_io_time_seconds_total{%(nodeExporterSelector)s,%(diskDeviceSelector)s}[1m])
+                irate(node_disk_io_time_seconds_total{%(nodeExporterSelector)s,%(diskDeviceSelector)s}[5m])
               )
             ||| % $._config,
           },
@@ -77,7 +77,7 @@
             record: 'instance:node_disk_saturation:sum_irate',
             expr: |||
               sum by (instance) (
-                irate(node_disk_io_time_weighted_seconds_total{%(nodeExporterSelector)s,%(diskDeviceSelector)s}[1m]) / 1e3
+                irate(node_disk_io_time_weighted_seconds_total{%(nodeExporterSelector)s,%(diskDeviceSelector)s}[5m]) / 1e3
               )
             ||| % $._config,
           },
@@ -85,8 +85,8 @@
             record: 'instance:node_net_utilisation:sum_irate',
             expr: |||
               sum by (instance) (
-                (irate(node_network_receive_bytes_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[1m]) +
-                 irate(node_network_transmit_bytes_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[1m]))
+                (irate(node_network_receive_bytes_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]) +
+                 irate(node_network_transmit_bytes_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]))
               )
             ||| % $._config,
           },
@@ -94,8 +94,8 @@
             record: 'instance:node_net_saturation:sum_irate',
             expr: |||
               sum by (instance) (
-                (irate(node_network_receive_drop_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[1m]) +
-                 irate(node_network_transmit_drop_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[1m]))
+                (irate(node_network_receive_drop_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]) +
+                 irate(node_network_transmit_drop_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]))
               )
             ||| % $._config,
           },
