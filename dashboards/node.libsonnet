@@ -110,7 +110,7 @@ local gauge = promgrafonnet.gauge;
           span=6,
           format='bytes',
         )
-        .addTarget(prometheus.target('irate(node_network_receive_bytes{%(nodeExporterSelector)s, instance="$instance", device=~"%(networkInterfaceSelector)s"}[5m])' % $._config, legendFormat='{{device}}'));
+        .addTarget(prometheus.target('irate(node_network_receive_bytes{%(nodeExporterSelector)s, instance="$instance", device=~"%(hostNetworkInterfaceSelector)s"}[5m])' % $._config, legendFormat='{{device}}'));
 
       local networkTransmitted =
         graphPanel.new(
@@ -119,7 +119,7 @@ local gauge = promgrafonnet.gauge;
           span=6,
           format='bytes',
         )
-        .addTarget(prometheus.target('irate(node_network_transmit_bytes{%(nodeExporterSelector)s, instance="$instance", device=~"%(networkInterfaceSelector)s"}[5m])' % $._config, legendFormat='{{device}}'));
+        .addTarget(prometheus.target('irate(node_network_transmit_bytes{%(nodeExporterSelector)s, instance="$instance", device=~"%(hostNetworkInterfaceSelector)s"}[5m])' % $._config, legendFormat='{{device}}'));
 
       dashboard.new('Nodes', time_from='now-1h')
       .addTemplate(

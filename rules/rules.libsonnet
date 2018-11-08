@@ -85,8 +85,8 @@
             record: 'instance:node_net_utilisation:sum_irate',
             expr: |||
               sum by (instance) (
-                (irate(node_network_receive_bytes_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]) +
-                 irate(node_network_transmit_bytes_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]))
+                (irate(node_network_receive_bytes_total{%(nodeExporterSelector)s,%(hostNetworkInterfaceSelector)s}[5m]) +
+                 irate(node_network_transmit_bytes_total{%(nodeExporterSelector)s,%(hostNetworkInterfaceSelector)s}[5m]))
               )
             ||| % $._config,
           },
@@ -94,8 +94,8 @@
             record: 'instance:node_net_saturation:sum_irate',
             expr: |||
               sum by (instance) (
-                (irate(node_network_receive_drop_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]) +
-                 irate(node_network_transmit_drop_total{%(nodeExporterSelector)s,%(networkInterfaceSelector)s}[5m]))
+                (irate(node_network_receive_drop_total{%(nodeExporterSelector)s,%(hostNetworkInterfaceSelector)s}[5m]) +
+                 irate(node_network_transmit_drop_total{%(nodeExporterSelector)s,%(hostNetworkInterfaceSelector)s}[5m]))
               )
             ||| % $._config,
           },
