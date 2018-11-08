@@ -7,7 +7,7 @@
           {
             alert: 'NodeFilesystemSpaceFillingUp',
             expr: |||
-              node_filesystem_avail_bytes{%(nodeExporterSelector)s,%(fstypeSelector)s} / node_filesystem_size_bytes_bytes{%(nodeExporterSelector)s,%(fstypeSelector)s} < 0.4
+              node_filesystem_avail_bytes{%(nodeExporterSelector)s,%(fstypeSelector)s} / node_filesystem_size_bytes{%(nodeExporterSelector)s,%(fstypeSelector)s} < 0.4
               and
               node_filesystem_readonly{%(nodeExporterSelector)s,%(fstypeSelector)s} == 0
               and
@@ -129,7 +129,7 @@
               severity: 'critical',
             },
             annotations: {
-              message: 'Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ $value }}% available space left.',
+              message: 'Filesystem on {{ $labels.device }} at {{ $labels.instance }} has only {{ $value }}% available inodes left.',
             },
           },
           {
