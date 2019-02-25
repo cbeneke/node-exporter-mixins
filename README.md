@@ -2,7 +2,7 @@
 
 > NOTE: This project is *alpha* stage. Flags, configuration, behaviour and design may change significantly in following releases.
 
-A set of Grafana dashboards and Prometheus alerts for [node_expoter](https://github.com/prometheus/node_exporter).
+A set of Prometheus alerts for [node_expoter](https://github.com/prometheus/node_exporter).
 
 
 ## Disclaimer
